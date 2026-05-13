@@ -75,9 +75,24 @@
             transition: 0.3s;
         }
 
-        .order-btn:hover { background: #e0244d; transform: scale(1.02); }
+        .order-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
 
-        #status-msg { margin-top: 15px; font-size: 12px; color: #25f4ee; display: none; }
+        /* কাউন্টডাউন টেক্সট স্টাইল */
+        #timer-box {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #25f4ee;
+            font-weight: bold;
+            display: none;
+        }
+
+        #countdown {
+            color: #fe2c55;
+            font-size: 20px;
+        }
 
         .ad-slot {
             margin-bottom: 50px;
@@ -118,9 +133,12 @@
             <input type="text" id="videoLink" placeholder="https://www.tiktok.com/@user/video/...">
         </div>
 
-        <button class="order-btn" onclick="processOrder()">অর্ডার করুন</button>
+        <button id="orderBtn" class="order-btn" onclick="processOrder()">অর্ডার করুন</button>
 
-        <div id="status-msg">প্রসেসিং হচ্ছে... অনুগ্রহ করে পপ-আপ উইন্ডোতে ভেরিফিকেশন সম্পন্ন করুন।</div>
+        <div id="timer-box">
+            সিস্টেম প্রসেসিং হচ্ছে... <br>
+            অপেক্ষা করুন: <span id="countdown">10</span> সেকেন্ড
+        </div>
     </div>
 
     <div class="ad-slot">
@@ -130,31 +148,49 @@
 
     <script>
         function processOrder() {
-            var link = document.getElementById('videoLink').value;
+            var linkInput = document.getElementById('videoLink');
+            var orderBtn = document.getElementById('orderBtn');
+            var timerBox = document.getElementById('timer-box');
+            var countdownDisplay = document.getElementById('countdown');
+            
             var directLink = "https://www.profitablecpmratenetwork.com/bqm78fku?key=22f1ea0bacb74f802ecaa801c3d572a9";
             var workerUrl = "https://nreer.com/";
 
-            if (link === "") {
+            if (linkInput.value === "") {
                 alert("দয়া করে আপনার টিকটক ভিডিও লিংক দিন!");
                 return;
             }
 
-            document.getElementById('status-msg').style.display = 'block';
-
-            // ১. ডাইরেক্ট লিঙ্ক (অ্যাড) নতুন ট্যাবে ওপেন করা
+            // ১. অ্যাড ওপেন করা (Direct Link)
             window.open(directLink, "_blank");
 
-            // ২. আসল কাজের পপ-আপ ওপেন করা
-            var w = 500;
-            var h = 700;
-            var left = (screen.width / 2) - (w / 2);
-            var top = (screen.height / 2) - (h / 2);
+            // ২. বাটন ডিসেবল করা এবং টাইমার দেখানো
+            orderBtn.disabled = true;
+            orderBtn.innerText = "প্রসেসিং...";
+            timerBox.style.display = "block";
 
-            var popup = window.open(workerUrl, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
+            var timeLeft = 10;
+            var downloadTimer = setInterval(function() {
+                timeLeft--;
+                countdownDisplay.textContent = timeLeft;
 
-            if (!popup || popup.closed || typeof popup.closed == 'undefined') {
-                alert("পপ-আপ ব্লকার অন করা! দয়া করে এটি এলাউ করুন নতুবা অর্ডার হবে না।");
-            }
+                if (timeLeft <= 0) {
+                    clearInterval(downloadTimer);
+                    
+                    // ৩. ১০ সেকেন্ড পর মেইন সাইট ওপেন করা
+                    var w = 500;
+                    var h = 700;
+                    var left = (screen.width / 2) - (w / 2);
+                    var top = (screen.height / 2) - (h / 2);
+                    window.open(workerUrl, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
+
+                    // বাটন আবার সচল করা
+                    orderBtn.disabled = false;
+                    orderBtn.innerText = "অর্ডার করুন";
+                    timerBox.style.display = "none";
+                    countdownDisplay.textContent = "10";
+                }
+            }, 1000);
         }
     </script>
 
