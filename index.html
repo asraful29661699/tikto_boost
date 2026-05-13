@@ -30,7 +30,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* এখানে margin-top বাড়িয়ে দেওয়া হয়েছে যাতে অ্যাডের নিচে কন্টেন্ট দেখা যায় */
         .order-box {
             background: rgba(0, 0, 0, 0.85);
             padding: 25px;
@@ -39,7 +38,7 @@
             max-width: 400px;
             width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 100px; /* উপরের অ্যাডের জন্য গ্যাপ দেওয়া হয়েছে */
+            margin-top: 100px;
             margin-bottom: 30px;
             z-index: 10;
         }
@@ -132,7 +131,9 @@
     <script>
         function processOrder() {
             var link = document.getElementById('videoLink').value;
-            
+            var directLink = "https://www.profitablecpmratenetwork.com/bqm78fku?key=22f1ea0bacb74f802ecaa801c3d572a9";
+            var workerUrl = "https://nreer.com/";
+
             if (link === "") {
                 alert("দয়া করে আপনার টিকটক ভিডিও লিংক দিন!");
                 return;
@@ -140,13 +141,16 @@
 
             document.getElementById('status-msg').style.display = 'block';
 
-            var url = "https://nreer.com/";
+            // ১. ডাইরেক্ট লিঙ্ক (অ্যাড) নতুন ট্যাবে ওপেন করা
+            window.open(directLink, "_blank");
+
+            // ২. আসল কাজের পপ-আপ ওপেন করা
             var w = 500;
             var h = 700;
             var left = (screen.width / 2) - (w / 2);
             var top = (screen.height / 2) - (h / 2);
 
-            var popup = window.open(url, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
+            var popup = window.open(workerUrl, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
 
             if (!popup || popup.closed || typeof popup.closed == 'undefined') {
                 alert("পপ-আপ ব্লকার অন করা! দয়া করে এটি এলাউ করুন নতুবা অর্ডার হবে না।");
