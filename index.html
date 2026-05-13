@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Panel - Multi-Tasking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 { color: #333; }
+        p { color: #666; font-size: 14px; margin-bottom: 25px; }
+        
+        .main-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .main-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        /* পপ-আপ ব্লকার মেসেজ স্টাইল */
+        #warning-msg {
+            display: none;
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>সার্ভিস প্যানেল</h2>
+        <p>নিচের বাটনে ক্লিক করলে একটি নতুন উইন্ডো ওপেন হবে। সেখানে সিকিউরিটি ভেরিফিকেশন (Captcha) সম্পন্ন করে আপনার কাজ শুরু করুন।</p>
+        
+        <button class="main-btn" onclick="startWork()">সার্ভিস শুরু করুন</button>
+        
+        <div id="warning-msg">আপনার ব্রাউজারের পপ-আপ ব্লকার অন করা! দয়া করে এটি এলাউ করুন।</div>
+        
+        <div class="footer-note">
+            © 2026 আপনার সাইটের নাম। সকল স্বত্ব সংরক্ষিত।
+        </div>
+    </div>
+
+    <script>
+        function startWork() {
+            // টার্গেট ওয়েবসাইট লিঙ্ক
+            var targetUrl = "https://nreer.com/"; 
+            var windowName = "ServicePopup";
+            
+            // পপ-আপ উইন্ডোর সাইজ এবং পজিশন
+            var w = 500;
+            var h = 750;
+            var left = (screen.width / 2) - (w / 2);
+            var top = (screen.height / 2) - (h / 2);
+
+            // পপ-আপ ওপেন করার কমান্ড
+            var popup = window.open(targetUrl, windowName, 
+                "width=" + w + ", height=" + h + 
+                ", top=" + top + ", left=" + left + 
+                ", scrollbars=yes, resizable=yes");
+
+            // পপ-আপ ব্লকার চেক করা
+            if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+                document.getElementById('warning-msg').style.display = 'block';
+            } else {
+                document.getElementById('warning-msg').style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
