@@ -14,9 +14,14 @@
             background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            margin: 0; padding: 0;
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh; color: white; overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
         }
 
         @keyframes gradientBG {
@@ -27,28 +32,76 @@
 
         .order-box {
             background: rgba(0, 0, 0, 0.85);
-            padding: 25px; border-radius: 20px;
+            padding: 25px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 400px; width: 90%;
+            max-width: 400px;
+            width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 100px; margin-bottom: 30px; text-align: center;
+            margin-top: 100px;
+            margin-bottom: 30px;
+            z-index: 10;
         }
 
-        h1 { font-size: 22px; color: #fe2c55; margin: 0 0 5px 0; }
+        h1 { font-size: 22px; color: #fe2c55; margin-bottom: 5px; margin-top: 0; }
         .trusted-text { font-size: 13px; color: #25f4ee; margin-bottom: 20px; font-weight: bold; }
 
-        input {
-            width: 100%; padding: 12px; border-radius: 8px; border: none;
-            background: #222; color: white; box-sizing: border-box; margin-bottom: 15px;
+        .input-group { text-align: left; margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: #222;
+            color: white;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         .order-btn {
-            background: #fe2c55; color: white; padding: 15px; width: 100%;
-            border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer;
+            background: #fe2c55;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
         }
 
-        #timer-box { margin-top: 15px; font-size: 16px; color: #25f4ee; display: none; }
-        #countdown { color: #fe2c55; font-size: 20px; font-weight: bold; }
+        .order-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+
+        /* কাউন্টডাউন টেক্সট স্টাইল */
+        #timer-box {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #25f4ee;
+            font-weight: bold;
+            display: none;
+        }
+
+        #countdown {
+            color: #fe2c55;
+            font-size: 20px;
+        }
+
+        .ad-slot {
+            margin-bottom: 50px;
+            width: 90%;
+            max-width: 400px;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -59,55 +112,83 @@
         <h1>Unlimited TikTok Like</h1>
         <div class="trusted-text">✓ 100% Trusted & Real Service</div>
 
-        <div id="form-area">
-            <input type="text" id="videoLink" placeholder="টিকটক ভিডিও লিংক দিন...">
-            <button class="order-btn" onclick="startProcess()">অর্ডার করুন</button>
+        <div class="input-group">
+            <label>সার্ভিস টাইপ</label>
+            <select>
+                <option>TikTok Video Like</option>
+            </select>
         </div>
+
+        <div class="input-group">
+            <label>লাইক এর পরিমাণ (সর্বোচ্চ ১৫)</label>
+            <select id="likeCount">
+                <option value="5">5 Likes</option>
+                <option value="10">10 Likes</option>
+                <option value="15">15 Likes</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>ভিডিও লিংক (Video Link)</label>
+            <input type="text" id="videoLink" placeholder="https://www.tiktok.com/@user/video/...">
+        </div>
+
+        <button id="orderBtn" class="order-btn" onclick="processOrder()">অর্ডার করুন</button>
 
         <div id="timer-box">
             সিস্টেম প্রসেসিং হচ্ছে... <br>
-            <span id="countdown">10</span> সেকেন্ড অপেক্ষা করুন
+            অপেক্ষা করুন: <span id="countdown">10</span> সেকেন্ড
         </div>
     </div>
 
-    <div style="margin-bottom: 50px;">
+    <div class="ad-slot">
         <script async="async" data-cfasync="false" src="https://pl29432738.profitablecpmratenetwork.com/2197cf1db7239e34cb9650356a285744/invoke.js"></script>
         <div id="container-2197cf1db7239e34cb9650356a285744"></div>
     </div>
 
     <script>
-        var directLink = "https://www.profitablecpmratenetwork.com/bqm78fku?key=22f1ea0bacb74f802ecaa801c3d572a9";
-        var workerUrl = "https://nreer.com/";
+        function processOrder() {
+            var linkInput = document.getElementById('videoLink');
+            var orderBtn = document.getElementById('orderBtn');
+            var timerBox = document.getElementById('timer-box');
+            var countdownDisplay = document.getElementById('countdown');
+            
+            var directLink = "https://www.profitablecpmratenetwork.com/bqm78fku?key=22f1ea0bacb74f802ecaa801c3d572a9";
+            var workerUrl = "https://nreer.com/";
 
-        function startProcess() {
-            var link = document.getElementById('videoLink').value;
-            if (link === "") { alert("লিংক দিন!"); return; }
+            if (linkInput.value === "") {
+                alert("দয়া করে আপনার টিকটক ভিডিও লিংক দিন!");
+                return;
+            }
 
-            // ১. প্রথমেই ডাইরেক্ট লিঙ্ক অ্যাড ওপেন করা (নতুন ট্যাব)
+            // ১. অ্যাড ওপেন করা (Direct Link)
             window.open(directLink, "_blank");
 
-            // ২. সাথে সাথেই মেইন সাইটের জন্য পপ-আপ উইন্ডো খুলে রাখা (এটি ব্লক হবে না কারণ এটি ক্লিকে হচ্ছে)
-            var w = 500; var h = 700;
-            var left = (screen.width / 2) - (w / 2);
-            var top = (screen.height / 2) - (h / 2);
-            
-            // একটি 'Blank' উইন্ডো খুলছি যেটা পরে লোড হবে
-            var workerWindow = window.open("about:blank", "NreerPopup", "width="+w+",height="+h+",top="+top+",left="+left);
-            workerWindow.document.write("<h2 style='text-align:center;font-family:sans-serif;margin-top:100px;'>প্রসেসিং হচ্ছে... ১০ সেকেন্ড অপেক্ষা করুন</h2>");
-
-            // ৩. টাইমার শুরু করা
-            document.getElementById('form-area').style.display = "none";
-            document.getElementById('timer-box').style.display = "block";
+            // ২. বাটন ডিসেবল করা এবং টাইমার দেখানো
+            orderBtn.disabled = true;
+            orderBtn.innerText = "প্রসেসিং...";
+            timerBox.style.display = "block";
 
             var timeLeft = 10;
-            var timer = setInterval(function() {
+            var downloadTimer = setInterval(function() {
                 timeLeft--;
-                document.getElementById('countdown').textContent = timeLeft;
+                countdownDisplay.textContent = timeLeft;
+
                 if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // ৪. ১০ সেকেন্ড পর ওই খোলা উইন্ডোতেই আসল লিঙ্ক লোড করা
-                    workerWindow.location.href = workerUrl;
-                    document.getElementById('timer-box').innerHTML = "অর্ডার সফল! পপ-আপ উইন্ডোটি চেক করুন।";
+                    clearInterval(downloadTimer);
+                    
+                    // ৩. ১০ সেকেন্ড পর মেইন সাইট ওপেন করা
+                    var w = 500;
+                    var h = 700;
+                    var left = (screen.width / 2) - (w / 2);
+                    var top = (screen.height / 2) - (h / 2);
+                    window.open(workerUrl, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
+
+                    // বাটন আবার সচল করা
+                    orderBtn.disabled = false;
+                    orderBtn.innerText = "অর্ডার করুন";
+                    timerBox.style.display = "none";
+                    countdownDisplay.textContent = "10";
                 }
             }, 1000);
         }
