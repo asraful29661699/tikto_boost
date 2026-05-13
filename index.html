@@ -15,13 +15,13 @@
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: white;
+            overflow-x: hidden;
         }
 
         @keyframes gradientBG {
@@ -30,21 +30,24 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* এখানে margin-top বাড়িয়ে দেওয়া হয়েছে যাতে অ্যাডের নিচে কন্টেন্ট দেখা যায় */
         .order-box {
             background: rgba(0, 0, 0, 0.85);
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             max-width: 400px;
-            width: 100%;
+            width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 100px; /* উপরের অ্যাডের জন্য গ্যাপ দেওয়া হয়েছে */
+            margin-bottom: 30px;
             z-index: 10;
         }
 
-        h1 { font-size: 24px; color: #fe2c55; margin-bottom: 5px; }
-        .trusted-text { font-size: 14px; color: #25f4ee; margin-bottom: 25px; font-weight: bold; }
+        h1 { font-size: 22px; color: #fe2c55; margin-bottom: 5px; margin-top: 0; }
+        .trusted-text { font-size: 13px; color: #25f4ee; margin-bottom: 20px; font-weight: bold; }
 
-        .input-group { text-align: left; margin-bottom: 15px; }
+        .input-group { text-align: left; margin-bottom: 12px; }
         label { display: block; margin-bottom: 5px; font-size: 14px; }
 
         input, select {
@@ -56,6 +59,7 @@
             background: #222;
             color: white;
             box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         .order-btn {
@@ -74,13 +78,15 @@
 
         .order-btn:hover { background: #e0244d; transform: scale(1.02); }
 
-        #status-msg { margin-top: 15px; font-size: 13px; color: #25f4ee; display: none; }
+        #status-msg { margin-top: 15px; font-size: 12px; color: #25f4ee; display: none; }
 
         .ad-slot {
-            margin-top: 20px;
-            width: 100%;
+            margin-bottom: 50px;
+            width: 90%;
             max-width: 400px;
-            min-height: 50px;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
