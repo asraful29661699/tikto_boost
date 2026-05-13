@@ -3,44 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রাইভেট সার্ভিস প্যানেল</title>
+    <title>Unlimited TikTok Likes - Trusted Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background: #111; color: white; text-align: center; padding-top: 100px; }
-        .box { border: 2px solid #00ff00; display: inline-block; padding: 40px; border-radius: 20px; }
-        .btn { background: #00ff00; color: black; padding: 15px 30px; font-weight: bold; border: none; cursor: pointer; border-radius: 10px; }
-        #status { margin-top: 20px; color: #aaa; }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .order-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 { font-size: 24px; color: #fe2c55; margin-bottom: 5px; }
+        .trusted-text { font-size: 14px; color: #25f4ee; margin-bottom: 25px; font-weight: bold; }
+
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: #222;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .order-btn {
+            background: #fe2c55;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .order-btn:hover { background: #e0244d; transform: scale(1.02); }
+
+        #status-msg { margin-top: 15px; font-size: 13px; color: #25f4ee; display: none; }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h2>সিস্টেম প্রসেসিং</h2>
-        <p>কাজ শুরু করতে নিচের বাটনে ক্লিক করুন এবং সিকিউরিটি ভেরিফিকেশনটি সম্পন্ন করুন।</p>
-        <button class="btn" onclick="openAndMask()">সার্ভিস এক্টিভেট করুন</button>
-        <div id="status"></div>
+    <div class="order-box">
+        <h1>Unlimited TikTok Like</h1>
+        <div class="trusted-text">✓ 100% Trusted & Real Service</div>
+
+        <div class="input-group">
+            <label>সার্ভিস টাইপ</label>
+            <select>
+                <option>TikTok Video Like</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>লাইক এর পরিমাণ (সর্বোচ্চ ১৫)</label>
+            <select id="likeCount">
+                <option value="5">5 Likes</option>
+                <option value="10">10 Likes</option>
+                <option value="15">15 Likes</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>ভিডিও লিংক (Video Link)</label>
+            <input type="text" id="videoLink" placeholder="https://www.tiktok.com/@user/video/...">
+        </div>
+
+        <button class="order-btn" onclick="processOrder()">অর্ডার করুন</button>
+
+        <div id="status-msg">প্রসেসিং হচ্ছে... অনুগ্রহ করে পপ-আপ উইন্ডোতে ভেরিফিকেশন সম্পন্ন করুন।</div>
     </div>
 
     <script>
-        function openAndMask() {
+        function processOrder() {
+            var link = document.getElementById('videoLink').value;
+            
+            if (link === "") {
+                alert("দয়া করে আপনার টিকটক ভিডিও লিংক দিন!");
+                return;
+            }
+
+            document.getElementById('status-msg').style.display = 'block';
+
+            // nreer.com পপ-আপ ওপেন করার কোড
             var url = "https://nreer.com/";
-            document.getElementById('status').innerText = "সিস্টেম কানেক্ট হচ্ছে... অনুগ্রহ করে নতুন উইন্ডোতে ভেরিফাই করুন।";
+            var w = 500;
+            var h = 700;
+            var left = (screen.width / 2) - (w / 2);
+            var top = (screen.height / 2) - (h / 2);
 
-            // একটি ছোট উইন্ডো খোলা যা ইউজার ভেরিফাই করার পর চাইলে মিনিমাইজ করতে পারবে
-            var workerWindow = window.open(url, "Worker", "width=400,height=500,top=100,left=100");
+            var popup = window.open(url, "NreerVerify", "width=" + w + ",height=" + h + ",top=" + top + ",left=" + left + ",scrollbars=yes");
 
-            // একটি টাইমার সেট করা যাতে ইউজার মনে করে আপনার সাইটে কাজ হচ্ছে
-            var timeLeft = 90; // nreer এর সেই ১ মিনিট ৩০ সেকেন্ডের টাইমার
-            var timerId = setInterval(function() {
-                if (timeLeft <= 0) {
-                    clearInterval(timerId);
-                    document.getElementById('status').innerText = "কাজ সম্পন্ন হয়েছে!";
-                    workerWindow.close(); // কাজ শেষে অদৃশ্য উইন্ডোটি বন্ধ করে দেওয়া
-                } else {
-                    document.getElementById('status').innerText = "প্রসেসিং হচ্ছে... দয়া করে " + timeLeft + " সেকেন্ড অপেক্ষা করুন।";
-                    timeLeft--;
-                }
-            }, 1000);
+            if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+                alert("পপ-আপ ব্লকার অন করা! দয়া করে এটি এলাউ করুন নতুবা অর্ডার হবে না।");
+            }
         }
     </script>
+
 </body>
 </html>
